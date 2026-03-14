@@ -3,7 +3,7 @@ name: Python
 on:
   workflow_dispatch:
   schedule:
-    - cron: "20 */02 * * *"
+    - cron: "15 */01 * * *"
   push:
     branches: ["main"]
 
@@ -27,20 +27,15 @@ jobs:
           python -m pip install --upgrade pip --quiet
           if [ -f requirements.txt ]; then pip install -r requirements.txt --quiet; fi
           python -m camoufox fetch
-        
-      - name: Importar arquivo .env
-        env:
-          PATH_ENV: ${{ secrets.PATH_ENV }}
-        run: echo "$PATH_ENV" > .env
 
       - name: Executar script Python
         env:
           URL: ${{ secrets.URL }}
-          API_KEY: ${{ secrets.API_KEY }}
+          URL_BROWSER: ${{ secrets.URL_BROWSER }}
           LOGIN: ${{ secrets.LOGIN }}
           REF: ${{ secrets.REF }}
-          USER_AGENT: ${{ secrets.USER_AGENT }}
-          COMANDO: ${{ secrets.COMANDO }}
+          MINUTOS: ${{ secrets.MINUTOS }}
+          MAX_RETRIES: ${{ secrets.MAX_RETRIES }}
         timeout-minutes: 30
         continue-on-error: true
         run: python app.py
