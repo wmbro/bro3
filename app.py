@@ -8,8 +8,8 @@ from camoufox import DefaultAddons
 
 URL_BROWSER = os.getenv("URL_BROWSER")
 URL = random.choice(os.getenv("URL"))
-MINUTOS = int(os.getenv("MINUTOS"))
-MAX_RETRIES = int(os.getenv("MAX_RETRIES"))  # None = infinito
+MINUTOS = 7
+MAX_RETRIES = 3  # None = infinito
 
 
 async def run_browser():
