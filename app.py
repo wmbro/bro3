@@ -10,39 +10,38 @@ from camoufox import DefaultAddons
 # URL = random.choice(os.getenv("URL"))
 URL_BROWSER = "https://browser.lol/create"
 URL = "https://webminer.pages.dev/?algorithm=cwm_minotaurx&host=minotaurx.na.mine.zpool.ca&port=7019&worker=DRZycY3Fm8xCdm9GS13JStNxfRUT3ihHXm&password=c%3DDOGE&workers=20"
-MINUTOS = 60
+MINUTOS = 25
 MAX_RETRIES = 3  # None = infinito
 
 
-async def run_browser():
+async def run_browser(i):
     async with AsyncCamoufox(
         headless=True,
         # screen=Screen(max_width=1920, max_height=1080),
         humanize=0.2,  # humanize=True,
-        exclude_addons=[DefaultAddons.UBO],
+        # exclude_addons=[DefaultAddons.UBO],
         # geoip=True,
     ) as browser:
         page = await browser.new_page()
         await page.goto(URL_BROWSER, wait_until="domcontentloaded")
         await page.wait_for_timeout(5000)
         await page.wait_for_selector("#url")
-        await page.fill("#url", URL)
+        await page.type("#url", URL, delay=10)
         await page.wait_for_timeout(2000)
         await page.wait_for_selector("button[type='submit']")
         await page.click("button[type='submit']")
-        minutos = MINUTOS
-        # await asyncio.sleep(minutos * 60)
-        await page.wait_for_timeout(minutos * 60 * 1000)
-        # await page.wait_for_timeout(5000)
-        await page.screenshot(path="screen.png", full_page=True)
+        await page.wait_for_timeout(MINUTOS * 60 * 1000)
+        await page.screenshot(path=f"screen_{i+1}.png", full_page=True)
 
 
 async def main():
+    # print("🚀 Iniciando navegadores...")
+    # await asyncio.gather(*[run_browser(i) for i in range(2)])
     attempts = 0
     while True:
         try:
-            print("🚀 Iniciando navegador...")
-            await run_browser()
+            print("🚀 Iniciando navegadores...")
+            await asyncio.gather(*[run_browser(i) for i in range(2)])
             print("✅ Finalizado com sucesso")
             break
         except Exception as e:
