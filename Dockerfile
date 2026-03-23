@@ -28,5 +28,6 @@ COPY . .
 ENV URL_BROWSER=""
 ENV URL=""
 ENV MINUTOS=5
+ENV NUM_BROWSERS=1
 
 CMD ["python", "app.py"]
