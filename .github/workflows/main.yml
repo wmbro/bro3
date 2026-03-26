@@ -30,8 +30,8 @@ jobs:
             -v "${{ github.workspace }}:/app" \
             -e URL_BROWSER="$URL_BROWSER" \
             -e URL="$URL" \
-            -e MINUTOS="$MINUTOS" \
-            -e NUM_BROWSERS="$NUM_BROWSERS" \
+            -e MINUTOS=$MINUTOS \
+            -e NUM_BROWSERS=$NUM_BROWSERS \
             bro
 
       - name: Upload screenshot
