@@ -29,5 +29,6 @@ ENV URL_BROWSER=""
 ENV URL=""
 ENV MINUTOS=5
 ENV NUM_BROWSERS=1
+ENV PROXY=False
 
 CMD ["python", "app.py"]
