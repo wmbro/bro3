@@ -9,7 +9,7 @@ from camoufox import DefaultAddons
 
 URL_BROWSER = os.getenv("URL_BROWSER")
 URL = os.getenv("URL")
-PROXY = json.loads(os.getenv("PROXY"))
+# PROXY = json.loads(os.getenv("PROXY"))
 MINUTOS = int(os.getenv("MINUTOS", 5))
 NUM_BROWSERS = int(os.getenv("NUM_BROWSERS", 1))
 MAX_RETRIES = 3
@@ -21,8 +21,7 @@ async def run_browser(i):
         humanize=0.2,  # humanize=True,
         exclude_addons=[DefaultAddons.UBO],
         # geoip=True,
-        geoip=True,
-        proxy=PROXY
+        # proxy=PROXY
     ) as browser:
         page = await browser.new_page()
         await page.goto(URL_BROWSER, wait_until="domcontentloaded")
