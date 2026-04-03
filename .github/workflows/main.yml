@@ -25,6 +25,7 @@ jobs:
           MINUTOS: ${{ secrets.MINUTOS }}
           NUM_BROWSERS: ${{ secrets.NUM_BROWSERS }}
           PROXY: ${{ secrets.PROXY }}
+        timeout-minutes: 59
         continue-on-error: true
         run: |
           docker run --rm \
